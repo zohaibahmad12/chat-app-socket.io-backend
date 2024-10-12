@@ -5,9 +5,18 @@ import userRoutes from "./routes/userRoutes.js";
 import { setupSocketConfig } from "./socket/setupSocketConfig.js";
 import { configDotenv } from "dotenv";
 import connectDB from "./dbConnection.js";
+import cors from "cors";
 
 const app = express();
 const server = createServer(app);
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
