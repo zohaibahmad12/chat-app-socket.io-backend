@@ -6,7 +6,6 @@ import { setupSocketConfig } from "./socket/setupSocketConfig.js";
 import { configDotenv } from "dotenv";
 import connectDB from "./dbConnection.js";
 
-configDotenv();
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
@@ -16,7 +15,9 @@ const io = new Server(server, {
     credentials: true,
   },
 });
+configDotenv();
 connectDB();
+app.use(express.json());
 
 app.use("/user", userRoutes);
 setupSocketConfig(io);
