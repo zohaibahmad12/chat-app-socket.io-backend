@@ -10,7 +10,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
     if (!password || password.length < 8 || password.length > 50) {
-      return res.status(400).json({ message: "Password must be between 8 and 50 characters long" });
+      return res.status(400).json({ message: "Password must be between 8 and 50 characters" });
     }
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -45,9 +45,13 @@ export const login = async (req, res) => {
     }
     const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login Successful", token });
   } catch (error) {
-    res.status(500).json({ message: "Error logging in", error: error.message });
+    res.status(500).json({ message: "Error Logging In", error: error.message });
     console.log(error);
   }
+};
+
+export const auth = async (req, res) => {
+  res.status(200).json({ message: "Token is valid", user: req.user });
 };
