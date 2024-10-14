@@ -17,6 +17,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Password is required"],
   },
+  activeStatus: {
+    type: String,
+    default: "offline",
+  },
+  lastSeen: {
+    type: Date,
+    default: Date.now,
+  },
+  chats: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Chat",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
