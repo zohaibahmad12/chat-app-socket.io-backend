@@ -12,7 +12,7 @@ export const verifyAuthToken = (req, res, next) => {
       return res.status(401).send({ message: "Unauthorized!", isTokenValid: false });
     }
     req.user = {
-      userId: decoded.userId,
+      _id: decoded._id,
       email: decoded.email,
     };
     next();
