@@ -13,8 +13,13 @@ export const verifyAuthToken = (req, res, next) => {
     }
     req.user = {
       _id: decoded._id,
+      name: decoded.name,
       email: decoded.email,
+      activeStatus: decoded.activeStatus,
+      chats: decoded.chats,
+      lastSeen: decoded.lastSeen,
     };
+
     next();
   });
 };

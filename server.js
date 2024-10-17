@@ -2,6 +2,7 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 import { setupSocketConfig } from "./socket/setupSocketConfig.js";
 import { configDotenv } from "dotenv";
 import connectDB from "./dbConnection.js";
@@ -29,6 +30,7 @@ connectDB();
 app.use(express.json());
 
 app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
 setupSocketConfig(io);
 
 app.get("/", (req, res) => {
